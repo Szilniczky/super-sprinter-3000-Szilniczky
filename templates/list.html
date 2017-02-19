@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Super Sprinter 3000</title>
+
+</head>
+
+<body>
+    <h1>Super Sprinter 3000</h1>
+    <form action="{{ url_for('show_form') }}">
+        <input type="submit" value="Add new user story" />
+    </form>
+    <br>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Story title</th>
+                <th>User story</th>
+                <th>Acceptance criteria</th>
+                <th>Business value</th>
+                <th>Estimation</th>
+                <th>Status</th>
+                <th>Edit</th>
+                <th>Delete</th>
+            </tr>
+        </thead>
+        {% for story in user_stories %}
+        <tbody>
+            <tr>
+                <td>{{story.id}}</td>
+                <td>{{story.story_title}}</td>
+                <td>{{story.user_story}}</td>
+                <td>{{story.acceptance_criteria}}</td>
+                <td>{{story.business_value}}</td>
+                <td>{{story.estimation}}</td>
+                <td>{{story.status}}</td>
+                <td>
+                    <form action="/story/{{story.id}}" method="get">
+                        <input type="image" src="../static/pencil.png" width="20" alt="Edit">
+                    </form>
+                </td>
+                <td>
+                    <form action="/delete/{{story.id}}" method="post">
+                        <input type="image" src="../static/trash.png" width="20" alt="Delete">
+                    </form>
+                </td>
+            </tr>
+        </tbody>
+        {% endfor %}
+    </table>
+
+</body>
+
+</html>

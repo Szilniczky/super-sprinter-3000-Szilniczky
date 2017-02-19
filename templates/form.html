@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Super Sprinter 3000</title>
+</head>
+
+<body>
+    {% if u_story %}
+    <h1>Super Sprinter 3000 - Edit Story</h1>
+    {% else %}
+    <h1>Super Sprinter 3000 - Add new Story</h1>
+    {% endif %}
+    <form action="/story/{{u_story.id}}" method="POST">
+        <p><label for="story_title">Story Title</label></p>
+        <textarea name='story_title' id="story_title" rows="1" required>{{u_story.story_title}}</textarea>
+        <p><label for="user_story">User Story</label></p>
+        <textarea name='user_story' id="user_story" rows="3" required>{{u_story.user_story}}</textarea>
+        <p><label for="acceptance_criteria">Acceptance Criteria</label></p>
+        <textarea name='acceptance_criteria' id="acceptance_criteria" rows="3" required>{{u_story.acceptance_criteria}}</textarea>
+        <p><label for="business_value">Business Value</label></p>
+        <input name="business_value" type="number" id="business_value" value="{{u_story.business_value}}" placeholder="100" min="100"
+            max="1500" step="100" required/>
+        <p><label for="estimation">Estimation (h)</label></p>
+        <input name="estimation" type="number" id="estimation" value="{{u_story.estimation}}" placeholder="0.5" min="0.5" max="40"
+            step="0.5" required/>
+        <p><label for="status">Status</label></p>
+        <Select name="status">
+        {% if u_story %}
+        <option selected="selected">{{ u_story.status }}</option>
+        <option>Planning</option>
+        <option>To Do</option>
+        <option>In Progress</option>
+        <option>Review</option>
+        <option>Done</option>
+        {% else %}
+        <option>Planning</option>
+        <option>To Do</option>
+        <option>In Progress</option>
+        <option>Review</option>
+        <option>Done</option>
+        {% endif %}
+        </Select>
+        <p><button type='submit'>{{button}}</button></p>
+    </form>
+
+</body>
+
+</html>
